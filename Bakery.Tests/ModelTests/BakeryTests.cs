@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Bakery.Models;
+using System.Collections.Generic;
 
 namespace Bakery.Tests
 {
@@ -18,7 +19,7 @@ namespace Bakery.Tests
     }
 
     [TestMethod]
-    public void MenuItem_AddGivenAmountToAmount_void()
+    public void AddAmount_AddGivenAmountToAmount_void()
     {
       int expectednewAmount = 2;
       MenuItem menuItem = new MenuItem();
@@ -29,7 +30,7 @@ namespace Bakery.Tests
     }
 
     [TestMethod]
-    public void MenuItem_RemoveGivenAmountToAmount_void()
+    public void RemoveAmount_RemoveGivenAmountToAmount_void()
     {
       int expectednewAmount = 1;
       MenuItem menuItem = new MenuItem();
@@ -39,7 +40,29 @@ namespace Bakery.Tests
 
       Assert.AreEqual(expectednewAmount, menuItem.GetAmount());
     }
+    [TestMethod]
+    public void GetBakeType_GetsTypeOfBakingGood_string()
+    {
+      string expectedType = "Plain";      
+      MenuItem menuItem = new MenuItem();
+      
+      string output = menuItem.GetBakeType();
+
+      Assert.AreEqual(expectedType, output);
+    }
+    [TestMethod]
+    public void SetBakeType_SetsTypeOfBakingGood_void()
+    {
+      string expectedtype = "Garlic";
+      string input = "Garlic";
+      MenuItem menuItem = new MenuItem();
+
+      menuItem.SetBakeType(input);
+
+      Assert.AreEqual(expectedtype,menuItem.GetBakeType());
+    }
   }
+
   [TestClass]
   public class BreadTests
   {
@@ -57,6 +80,7 @@ namespace Bakery.Tests
       Assert.AreEqual(expectedCost, outputedCost);
     }
   }
+
   [TestClass]
   public class PastryTests
   {

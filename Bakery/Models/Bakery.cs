@@ -6,6 +6,7 @@ namespace Bakery.Models
   public class MenuItem
   {
     protected int _amount;
+    protected string _type;
     public int GetAmount()
     {
       return _amount;
@@ -26,6 +27,14 @@ namespace Bakery.Models
       {
         _amount = 0;
       }
+    }
+    public void SetBakeType(string type)
+    {
+
+    }
+    public string GetBakeType()
+    {
+      return "test";
     }
   }
 

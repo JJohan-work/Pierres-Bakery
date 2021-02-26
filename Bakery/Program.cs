@@ -7,6 +7,8 @@ namespace Bakery
 {
   public class Program
   {
+    public static List<Bread> breadCart = new List<Bread> {};
+    public static List<Pastry> pastryCart = new List<Pastry> {};
 
     public static void Main()
     {
@@ -21,34 +23,33 @@ namespace Bakery
       
       if (response.ToLower() == "bread")
       {
-        Bread breadCart = new Bread();
+        Bread breadItem = new Bread();
         Console.Write("How many loafs would you like to buy?: ");
         int amountToAdd = Int32.Parse(Console.ReadLine());
-        breadCart.AddAmount(amountToAdd);
-        breadCart.AddBread(breadCart);
+        breadItem.AddAmount(amountToAdd);
+        breadCart.Add(breadItem);
         InitialPrompt();
       }
-      else if (response.ToLower() == "pastry")
-      {
-        Pastry pastryCart = new Pastry();
-        Console.Write("How many pastries would you like to buy?: ");
-        int amountToAdd = Int32.Parse(Console.ReadLine());
-        pastryCart.AddAmount(amountToAdd);
-        InitialPrompt();
-      }
+      // else if (response.ToLower() == "pastry")
+      // {
+      //   Pastry pastryCart = new Pastry();
+      //   Console.Write("How many pastries would you like to buy?: ");
+      //   int amountToAdd = Int32.Parse(Console.ReadLine());
+      //   pastryCart.AddAmount(amountToAdd);
+      //   InitialPrompt();
+      // }
       else if (response.ToLower() == "checkout")
       {
-        if (Bread.GetAll().Count == 0 && Pastry.GetAll().Count == 0)
+        if (breadCart.Count == 0 && pastryCart.Count == 0)
         {
           Console.WriteLine("Order at least 1 item from shop before checking out");
           InitialPrompt();
         }
         else
         {
-          List<Bread> breadOrders = Bread.GetAll();
-          foreach (Bread item in breadOrders)
+          foreach (Bread item in breadCart)
           {
-            Console.WriteLine($"{item.ToString()}");
+            Console.WriteLine($"{item.GetCost().ToString()}");
           }
 
           // Console.WriteLine($"Your Total is: ${breadCart.GetCost() + pastryCart.GetCost()}");
