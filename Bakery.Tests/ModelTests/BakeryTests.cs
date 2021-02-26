@@ -7,13 +7,6 @@ namespace Bakery.Tests
   [TestClass]
   public class MenuItemTests
   {
-    [TestMethod]
-    public void MenuItem_GetCostOfMenuItem_int()
-    {
-      int expectedCost = 0;
-      MenuItem menuItem = new MenuItem();
-      Assert.AreEqual(expectedCost, menuItem.GetCost());
-    }
 
     [TestMethod]
     public void MenuItem_GetAmountOfMenuItem_int()
