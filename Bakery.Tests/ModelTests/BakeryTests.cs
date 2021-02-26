@@ -8,14 +8,26 @@ namespace Bakery.Tests
   public class BreadTests
   {
     [TestMethod]
-    public void Bread_CreateBreadObjectWithCostAndAmountSetToZero_int()
+    public void MenuItem_GetCostOfMenuItem_int()
     {
       int expectedCost = 0;
-      int expectedAmount = 0;
-      Bread breadItem = new Bread();
+      MenuItem menuItem = new MenuItem();
 
-      Assert.AreEqual(expectedAmount, breadItem.amount);
-      Assert.AreEqual(expectedCost, breadItem.cost);
+      Assert.AreEqual(expectedCost, menuItem.GetCost());
     }
+    public void MenuItem_GetAmountOfMenuItem_int()
+    {
+      int expectedAmount = 0;
+      MenuItem menuItem = new MenuItem();
+
+      Assert.AreEqual(expectedAmount, menuItem.GetAmount());
+    }
+
+    // [TestMethod]
+    // public void Bread_CreateBreadObjectWithCostAndAmountSetToZero_int()
+    // {
+    //   Assert.AreEqual(expectedAmount, breadItem.getAmount());
+    //   Assert.AreEqual(expectedCost, breadItem.getCost());
+    // }
   }
 }
