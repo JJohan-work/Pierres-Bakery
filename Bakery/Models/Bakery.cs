@@ -20,6 +20,11 @@ namespace Bakery.Models
     {
       _amount += toAdd;
     }
+
+    public void RemoveAmount(int toAdd)
+    {
+      _amount += toAdd;
+    }
   }
 
   public class Bread : MenuItem

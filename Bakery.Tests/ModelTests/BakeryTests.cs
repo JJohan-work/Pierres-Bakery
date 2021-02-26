@@ -35,6 +35,17 @@ namespace Bakery.Tests
       Assert.AreEqual(expectednewAmount, menuItem.GetAmount());
     }
 
+    [TestMethod]
+    public void MenuItem_RemoveGivenAmountToAmount_void()
+    {
+      int expectednewAmount = 1;
+      MenuItem menuItem = new MenuItem();
+
+      menuItem.AddAmount(2);
+      menuItem.RemoveAmount(1);
+
+      Assert.AreEqual(expectednewAmount, menuItem.GetAmount());
+    }
 
     // [TestMethod]
     // public void Bread_CreateBreadObjectWithCostAndAmountSetToZero_int()
