@@ -15,6 +15,11 @@ namespace Bakery.Models
     {
       return _amount;
     }
+
+    public void AddAmount(int toAdd)
+    {
+
+    }
   }
 
   public class Bread : MenuItem
