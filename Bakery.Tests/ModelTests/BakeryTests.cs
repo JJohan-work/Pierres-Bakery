@@ -10,7 +10,7 @@ namespace Bakery.Tests
   {
 
     [TestMethod]
-    public void MenuItem_GetAmountOfMenuItem_int()
+    public void GetAmount_GetAmountOfMenuItem_int()
     {
       int expectedAmount = 0;
       MenuItem menuItem = new MenuItem();
