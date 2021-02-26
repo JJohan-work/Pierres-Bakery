@@ -12,6 +12,7 @@ namespace Bakery
 
     public static void Main()
     {
+      DrawChecker(20);
       Console.WriteLine("Welcome to Pierres Bakery!");
       InitialPrompt();
     }
@@ -31,41 +32,7 @@ namespace Bakery
       }
       else if (response.ToLower() == "checkout")
       {
-        if (breadCart.Count == 0 && pastryCart.Count == 0)
-        {
-          Console.WriteLine("Order at least 1 item from shop before checking out");
-          InitialPrompt();
-        }
-        else
-        {
-          int totalBreadCost = 0;
-          int totalPastryCost = 0;
-
-          if (breadCart.Count != 0)
-          {
-            Console.WriteLine("Bread_________________");
-            foreach (Bread item in breadCart)
-            {
-              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
-              totalBreadCost += item.GetCost();
-            }
-            Console.WriteLine($"    Bread Total: {totalBreadCost.ToString()}");
-          }
-
-          if (pastryCart.Count != 0)
-          {
-            Console.WriteLine("Pastries_________________");
-            foreach (Pastry item in pastryCart)
-            {
-              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
-              totalPastryCost += item.GetCost();
-            }
-            Console.WriteLine($"    Pastry Total: {totalPastryCost.ToString()}");
-          }
-
-          Console.WriteLine($"Total Order Cost: {(totalBreadCost + totalPastryCost).ToString()}");
-          Console.WriteLine("Thank you for Shopping at Pierre's Bakery! Have a good day!");
-        }
+        Checkout();
       }
       else if (response.ToLower() == "exit")
       {
@@ -101,6 +68,61 @@ namespace Bakery
       breadItem.SetBakeType(type);
       breadCart.Add(breadItem);
       InitialPrompt();
+    }
+    public static void Checkout()
+    {
+      if (breadCart.Count == 0 && pastryCart.Count == 0)
+        {
+          Console.WriteLine("Order at least 1 item from shop before checking out");
+          InitialPrompt();
+        }
+        else
+        {
+          int totalBreadCost = 0;
+          int totalPastryCost = 0;
+
+          Console.WriteLine("____________________");
+          if (breadCart.Count != 0)
+          {
+            Console.WriteLine("Bread");
+            foreach (Bread item in breadCart)
+            {
+              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
+              totalBreadCost += item.GetCost();
+            }
+            Console.WriteLine($"    Bread Total: {totalBreadCost.ToString()}");
+          }
+
+          if (pastryCart.Count != 0)
+          {
+            Console.WriteLine("Pastries");
+            foreach (Pastry item in pastryCart)
+            {
+              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
+              totalPastryCost += item.GetCost();
+            }
+            Console.WriteLine($"    Pastry Total: {totalPastryCost.ToString()}");
+          }
+          Console.WriteLine("____________________");
+          Console.WriteLine($"Total Order Cost: {(totalBreadCost + totalPastryCost).ToString()}");
+          Console.WriteLine("Thank you for Shopping at Pierre's Bakery! Have a good day!");
+        }
+    }
+
+    public static void DrawChecker(int length)
+    {
+      for (int i = 0; i<length; i++)
+      {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.Write(" ");
+        System.Threading.Thread.Sleep(10);
+        Console.BackgroundColor = ConsoleColor.Red;
+        Console.Write(" ");
+        System.Threading.Thread.Sleep(10);
+      }
+      Console.ResetColor();
+      Console.WriteLine();
+      System.Threading.Thread.Sleep(50);
     }
   }
 }
