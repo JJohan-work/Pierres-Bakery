@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace Bakery.Models
 {
   public class MenuItem
   {
     protected int _amount;
-
     public int GetAmount()
     {
       return _amount;
@@ -31,7 +31,6 @@ namespace Bakery.Models
 
   public class Bread : MenuItem
   {
-
     public int GetCost()
     {
       int specials = this._amount / 3;
