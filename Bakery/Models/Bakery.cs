@@ -23,13 +23,23 @@ namespace Bakery.Models
 
     public void RemoveAmount(int toAdd)
     {
-      _amount += toAdd;
+      if (_amount - toAdd >= 0)
+      {
+        _amount -= toAdd;
+      }
+      else
+      {
+        _amount = 0;
+      }
     }
   }
 
   public class Bread : MenuItem
   {
-
+    public int GetCost()
+    {
+      return 5;
+    }
   }
   public class Pastry : MenuItem
   {

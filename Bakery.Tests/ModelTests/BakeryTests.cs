@@ -46,12 +46,22 @@ namespace Bakery.Tests
 
       Assert.AreEqual(expectednewAmount, menuItem.GetAmount());
     }
+  }
+  [TestClass]
+  public class BreadTests
+  {
+    [TestMethod]
+    public void Bread_CalculateCostOfBread_int()
+    {
+      int expectedCost = 45;
+      int givenAmount = 13;
 
-    // [TestMethod]
-    // public void Bread_CreateBreadObjectWithCostAndAmountSetToZero_int()
-    // {
-    //   Assert.AreEqual(expectedAmount, breadItem.getAmount());
-    //   Assert.AreEqual(expectedCost, breadItem.getCost());
-    // }
+      Bread bread = new Bread();
+      bread.AddAmount(givenAmount);
+      
+      int outputedCost = bread.GetCost();
+
+      Assert.AreEqual(expectedCost, outputedCost);
+    }
   }
 }
