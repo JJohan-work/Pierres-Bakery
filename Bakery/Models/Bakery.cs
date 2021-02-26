@@ -5,7 +5,7 @@ namespace Bakery.Models
   public class MenuItem
   {
     protected int _amount;
-    
+
     public int GetAmount()
     {
       return _amount;
@@ -42,6 +42,9 @@ namespace Bakery.Models
   }
   public class Pastry : MenuItem
   {
-
+    public int GetCost()
+    {
+      return 0;
+    }
   }
 }
