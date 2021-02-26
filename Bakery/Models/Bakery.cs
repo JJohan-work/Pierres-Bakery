@@ -18,7 +18,7 @@ namespace Bakery.Models
 
     public void AddAmount(int toAdd)
     {
-
+      _amount += toAdd;
     }
   }
 
