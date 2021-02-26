@@ -44,7 +44,10 @@ namespace Bakery.Models
   {
     public int GetCost()
     {
-      return 0;
+      int specials = this._amount / 3;
+      int regular = this._amount % 3;
+
+      return ((specials * 5) + (regular * 2));
     }
   }
 }
