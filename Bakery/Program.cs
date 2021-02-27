@@ -9,6 +9,8 @@ namespace Bakery
   {
     public static List<Bread> breadCart = new List<Bread> {};
     public static List<Pastry> pastryCart = new List<Pastry> {};
+    public static Pastry activePastry;
+    public static Bread activeBread;
 
     public static void Main()
     {
@@ -50,10 +52,21 @@ namespace Bakery
     }
     public static void OrderPastry()
     {
-      Pastry pastryItem = new Pastry();
+      activePastry = new Pastry();
+      GetPastryAmount();
+      GetPastryType();
+      pastryCart.Add(activePastry);
+      InitialPrompt();
+    }
+    public static void GetPastryAmount()
+    {
       Console.Write("How many pastries would you like to buy?: ");
-      int amountToAdd = Int32.Parse(Console.ReadLine());
-
+      Action onFail = Program.GetPastryAmount;
+      int amountToAdd = Int32.Parse(ParseInput(new List<string> {"num"},"Please enter a Number", onFail));
+      activePastry.AddAmount(amountToAdd);
+    }
+    public static void GetPastryType()
+    {
       Console.BackgroundColor = ConsoleColor.Red;
       Console.ForegroundColor = ConsoleColor.White;
       Console.Write("Types of Pastries:");
@@ -63,19 +76,17 @@ namespace Bakery
       Console.Write("1   Flaky\n2   Puff\n3   ShortCrust\n4   Cinnamon rolls\n");
       Console.ResetColor();
       Console.WriteLine();
-
       Console.Write("What Type of pastrie would you like to buy? (flaky/puff/short/cinnamon): ");
-      string type = Console.ReadLine();
-      pastryItem.AddAmount(amountToAdd);
-      pastryItem.SetBakeType(type);
-      pastryCart.Add(pastryItem);
-      InitialPrompt();
+      Action onFail = Program.GetPastryType;
+      string type = ParseInput(new List<string> {"flaky","puff","short","cinnamon"},"Please enter a valid option", onFail);
+      activePastry.SetBakeType(type);
     }
     public static void OrderBread()
     {
       Bread breadItem = new Bread();
       Console.Write("How many loafs would you like to buy?: ");
-      int amountToAdd = Int32.Parse(Console.ReadLine());
+      Action onFail = Program.OrderBread;
+      int amountToAdd = Int32.Parse(ParseInput(new List<string> {"num"},"Please enter a Number", onFail));
 
       Console.BackgroundColor = ConsoleColor.Red;
       Console.ForegroundColor = ConsoleColor.White;
@@ -86,8 +97,6 @@ namespace Bakery
       Console.Write("1   Plain\n2   Garlic\n3   Sourdough\n4   Herbs\n");
       Console.ResetColor();
       Console.WriteLine();
-
-
       Console.Write("What Type of bread would you like to buy? (plain/garlic/sour/herb): ");
       string type = Console.ReadLine();
       breadItem.AddAmount(amountToAdd);
@@ -158,11 +167,20 @@ namespace Bakery
       string tested = Console.ReadLine();
       try
       {
-        foreach(string tester in acc)
-        {
-          if (tested == tester)
+        if (acc[0] == "num") {
+          if (Int32.Parse(tested) > 0)
           {
             return tested;
+          }
+        }
+        else
+        {
+          foreach(string tester in acc)
+          {
+            if (tested == tester)
+            {
+              return tested;
+            }
           }
         }
         Console.WriteLine(error);
