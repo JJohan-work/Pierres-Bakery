@@ -25,7 +25,8 @@ namespace Bakery
     {
       DrawChecker(20);
       Console.Write("Please select an option: (bread/pastry/checkout/exit): ");
-      string response = Console.ReadLine();
+      Action onFail = Program.InitialPrompt;
+      string response = ParseInput(new List<string>{"bread","pastry","checkout","exit"},"Please enter a valid option", onFail);
       
       if (response.ToLower() == "bread")
       {
@@ -152,10 +153,28 @@ namespace Bakery
       Console.WriteLine();
       System.Threading.Thread.Sleep(50);
     }
-    public static void ParseInput(string type, List<string> acc, string error, method callback)
+    public static string ParseInput(List<string> acc, string error, Action callback)
     {
-      
-      return "test";
+      string tested = Console.ReadLine();
+      try
+      {
+        foreach(string tester in acc)
+        {
+          if (tested == tester)
+          {
+            return tested;
+          }
+        }
+        Console.WriteLine(error);
+        callback();
+        return "fail";
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(error);
+        callback();
+        return "fail";
+      }
     }
   }
 }
