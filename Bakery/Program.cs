@@ -13,25 +13,33 @@ namespace Bakery
     public static void Main()
     {
       DrawChecker(20);
-      Console.WriteLine("Welcome to Pierres Bakery!");
+      Console.BackgroundColor = ConsoleColor.Red;
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.Write("        Welcome to Pierres Bakery!       ");
+      Console.ResetColor();
+      Console.WriteLine();
       InitialPrompt();
     }
 
     public static void InitialPrompt()
     {
+      DrawChecker(20);
       Console.Write("Please select an option: (bread/pastry/checkout/exit): ");
       string response = Console.ReadLine();
       
       if (response.ToLower() == "bread")
       {
+        DrawChecker(20);
         OrderBread();
       }
       if (response.ToLower() == "pastry")
       {
+        DrawChecker(20);
         OrderPastry();
       }
       else if (response.ToLower() == "checkout")
       {
+        DrawChecker(30);
         Checkout();
       }
       else if (response.ToLower() == "exit")
@@ -45,8 +53,15 @@ namespace Bakery
       Console.Write("How many pastries would you like to buy?: ");
       int amountToAdd = Int32.Parse(Console.ReadLine());
 
-      Console.WriteLine("Types of Pastries:");
-      Console.WriteLine("   Flaky\n   Puff\n   ShortCrust\n   Cinnamon rolls\n");
+      Console.BackgroundColor = ConsoleColor.Red;
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.Write("Types of Pastries:");
+      Console.BackgroundColor = ConsoleColor.White;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.WriteLine();
+      Console.Write("1   Flaky\n2   Puff\n3   ShortCrust\n4   Cinnamon rolls\n");
+      Console.ResetColor();
+      Console.WriteLine();
 
       Console.Write("What Type of pastrie would you like to buy? (flaky/puff/short/cinnamon): ");
       string type = Console.ReadLine();
@@ -60,8 +75,18 @@ namespace Bakery
       Bread breadItem = new Bread();
       Console.Write("How many loafs would you like to buy?: ");
       int amountToAdd = Int32.Parse(Console.ReadLine());
-      Console.WriteLine("Types of Bread:");
-      Console.WriteLine("   Plain\n   Garlic\n   Sourdough\n   Herbs\n");
+
+      Console.BackgroundColor = ConsoleColor.Red;
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.Write("Types of Bread:");
+      Console.BackgroundColor = ConsoleColor.White;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.WriteLine();
+      Console.Write("1   Plain\n2   Garlic\n3   Sourdough\n4   Herbs\n");
+      Console.ResetColor();
+      Console.WriteLine();
+
+
       Console.Write("What Type of bread would you like to buy? (plain/garlic/sour/herb): ");
       string type = Console.ReadLine();
       breadItem.AddAmount(amountToAdd);
@@ -87,7 +112,7 @@ namespace Bakery
             Console.WriteLine("Bread");
             foreach (Bread item in breadCart)
             {
-              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
+              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:${item.GetCost().ToString()}.00");
               totalBreadCost += item.GetCost();
             }
             Console.WriteLine($"    Bread Total: {totalBreadCost.ToString()}");
@@ -98,7 +123,7 @@ namespace Bakery
             Console.WriteLine("Pastries");
             foreach (Pastry item in pastryCart)
             {
-              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:{item.GetCost().ToString()}");
+              Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:${item.GetCost().ToString()}.00");
               totalPastryCost += item.GetCost();
             }
             Console.WriteLine($"    Pastry Total: {totalPastryCost.ToString()}");
@@ -111,6 +136,9 @@ namespace Bakery
 
     public static void DrawChecker(int length)
     {
+      Console.BackgroundColor = ConsoleColor.Red;
+      Console.Write(" ");
+      System.Threading.Thread.Sleep(10);
       for (int i = 0; i<length; i++)
       {
         Console.BackgroundColor = ConsoleColor.White;
@@ -123,6 +151,11 @@ namespace Bakery
       Console.ResetColor();
       Console.WriteLine();
       System.Threading.Thread.Sleep(50);
+    }
+    public static void ParseInput(string type, List<string> acc, string error, method callback)
+    {
+      
+      return "test";
     }
   }
 }
