@@ -73,7 +73,7 @@ namespace Bakery
       Console.BackgroundColor = ConsoleColor.White;
       Console.ForegroundColor = ConsoleColor.Black;
       Console.WriteLine();
-      Console.Write("1   Flaky\n2   Puff\n3   ShortCrust\n4   Cinnamon rolls\n");
+      Console.Write("1   Flaky   \n2   Puff   \n3   ShortCrust   \n4   Cinnamon rolls   ");
       Console.ResetColor();
       Console.WriteLine();
       Console.Write("What Type of pastrie would you like to buy? (flaky/puff/short/cinnamon): ");
@@ -94,11 +94,12 @@ namespace Bakery
       Console.BackgroundColor = ConsoleColor.White;
       Console.ForegroundColor = ConsoleColor.Black;
       Console.WriteLine();
-      Console.Write("1   Plain\n2   Garlic\n3   Sourdough\n4   Herbs\n");
+      Console.Write("1   Plain   \n2   Garlic   \n3   Sourdough   \n4   Herbs   ");
       Console.ResetColor();
       Console.WriteLine();
       Console.Write("What Type of bread would you like to buy? (plain/garlic/sour/herb): ");
-      string type = Console.ReadLine();
+      Action onTypeFail = Program.OrderBread;
+      string type = ParseInput(new List<string> { "plain", "garlic", "sour", "herb" }, "Please select a valid option", onTypeFail);
       breadItem.AddAmount(amountToAdd);
       breadItem.SetBakeType(type);
       breadCart.Add(breadItem);
@@ -125,7 +126,7 @@ namespace Bakery
               Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:${item.GetCost().ToString()}.00");
               totalBreadCost += item.GetCost();
             }
-            Console.WriteLine($"    Bread Total: {totalBreadCost.ToString()}");
+            Console.WriteLine($"    Bread Total: ${totalBreadCost.ToString()}.00");
           }
 
           if (pastryCart.Count != 0)
@@ -136,10 +137,10 @@ namespace Bakery
               Console.WriteLine($"    Type:{item.GetBakeType()} Amount:{item.GetAmount()} Cost:${item.GetCost().ToString()}.00");
               totalPastryCost += item.GetCost();
             }
-            Console.WriteLine($"    Pastry Total: {totalPastryCost.ToString()}");
+            Console.WriteLine($"    Pastry Total: ${totalPastryCost.ToString()}.00");
           }
           Console.WriteLine("____________________");
-          Console.WriteLine($"Total Order Cost: {(totalBreadCost + totalPastryCost).ToString()}");
+          Console.WriteLine($"Total Order Cost: ${(totalBreadCost + totalPastryCost).ToString()}.00");
           Console.WriteLine("Thank you for Shopping at Pierre's Bakery! Have a good day!");
         }
     }
