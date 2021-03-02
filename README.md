@@ -35,7 +35,7 @@
 
 ## Known Bugs
 
-*Error with recursion when using a bad input when selecting a type of baked good.*
+*none tracked at this time*
 
 * * *
 
