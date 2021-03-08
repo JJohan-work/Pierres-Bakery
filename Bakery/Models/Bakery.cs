@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-
 namespace Bakery.Models
 {
   public class MenuItem
   {
-    protected int _amount;
-    protected string _type = "Plain";
+    protected int _amount { get; set;}
+    protected string _type { get; set; }
     public int GetAmount()
     {
       return _amount;
@@ -28,7 +25,7 @@ namespace Bakery.Models
         _amount = 0;
       }
     }
-    public void SetBakeType(string type)
+    public void SetBakeType(string type="Plain")
     {
       _type = type;
     }
