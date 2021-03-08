@@ -41,7 +41,7 @@ namespace Bakery.Tests
     [TestMethod]
     public void GetBakeType_GetsTypeOfBakingGood_string()
     {
-      string expectedType = "Plain";      
+      string expectedType = null;      
       MenuItem menuItem = new MenuItem();
       
       string output = menuItem.GetBakeType();
@@ -77,6 +77,19 @@ namespace Bakery.Tests
 
       Assert.AreEqual(expectedCost, outputedCost);
     }
+    [TestMethod]
+    public void Bread_CalculateCostOfBreadNoDiscount_int()
+    {
+      int expectedCost = 10;
+      int givenAmount = 2;
+
+      Bread bread = new Bread();
+      bread.AddAmount(givenAmount);
+      
+      int outputedCost = bread.GetCost();
+
+      Assert.AreEqual(expectedCost, outputedCost);
+    }
   }
 
   [TestClass]
@@ -87,6 +100,19 @@ namespace Bakery.Tests
     {
       int expectedCost = 14;
       int givenAmount = 8;
+
+      Pastry pastry = new Pastry();
+      pastry.AddAmount(givenAmount);
+      
+      int outputedCost = pastry.GetCost();
+
+      Assert.AreEqual(expectedCost, outputedCost);
+    }
+    [TestMethod]
+    public void Pastry_CalculateCostOfPastryNoDiscount_int()
+    {
+      int expectedCost = 4;
+      int givenAmount = 2;
 
       Pastry pastry = new Pastry();
       pastry.AddAmount(givenAmount);
