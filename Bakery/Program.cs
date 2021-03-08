@@ -33,38 +33,26 @@ namespace Bakery
       if (response.ToLower() == "bread")
       {
         DrawChecker(20);
-        OrderBread();
+        activeBread = new Bread();
+        OrderBreadAmount();
       }
       if (response.ToLower() == "pastry")
       {
         DrawChecker(20);
-        OrderPastry();
+        activePastry = new Pastry();
+        OrderPastryAmount();
       }
       else if (response.ToLower() == "checkout")
       {
         DrawChecker(30);
         Checkout();
+        System.Environment.Exit(1);
       }
       else if (response.ToLower() == "exit")
       {
         Console.WriteLine("GoodBye!");
+        System.Environment.Exit(1);
       }
-    }
-    public static void OrderPastry()
-    {
-      activePastry = new Pastry();
-      OrderPastryAmount();
-      OrderPastryType();
-      pastryCart.Add(activePastry);
-      InitialPrompt();
-    }
-    public static void OrderBread()
-    {
-      activePastry = new Pastry();
-      OrderBreadAmount();
-      OrderBreadType();
-      breadCart.Add(activeBread);
-      InitialPrompt();
     }
     public static void OrderPastryAmount()
     {
@@ -72,6 +60,7 @@ namespace Bakery
       Action onFail = Program.OrderPastryAmount;
       int amountToAdd = Int32.Parse(ParseInput(new List<string> {"num"},"Please enter a Number", onFail));
       activePastry.AddAmount(amountToAdd);
+      OrderPastryType();
     }
     public static void OrderPastryType()
     {
@@ -81,7 +70,7 @@ namespace Bakery
       Console.BackgroundColor = ConsoleColor.White;
       Console.ForegroundColor = ConsoleColor.Black;
       Console.WriteLine();
-      Console.Write("1   Flaky   \n2   Puff   \n3   ShortCrust   \n4   Cinnamon rolls   ");
+      Console.Write("Flaky   \nPuff   \nShortCrust   \nCinnamon rolls   ");
       Console.ResetColor();
       Console.WriteLine();
       Console.Write("What Type of pastrie would you like to buy? (flaky/puff/short/cinnamon): ");
@@ -89,6 +78,8 @@ namespace Bakery
       string type = ParseInput(new List<string> {"flaky","puff","short","cinnamon"},"Please enter a valid option", onFail);
       activePastry.SetBakeType(type);
       Console.WriteLine("Your Selection has been added to checkout");
+      pastryCart.Add(activePastry);
+      InitialPrompt();
     }
     public static void OrderBreadAmount()
     {
@@ -97,6 +88,7 @@ namespace Bakery
       Action onFail = Program.OrderBreadAmount;
       int amountToAdd = Int32.Parse(ParseInput(new List<string> {"num"},"Please enter a Number", onFail));
       activeBread.AddAmount(amountToAdd);
+      OrderBreadType();
     }
     public static void OrderBreadType()
     {
@@ -106,7 +98,7 @@ namespace Bakery
       Console.BackgroundColor = ConsoleColor.White;
       Console.ForegroundColor = ConsoleColor.Black;
       Console.WriteLine();
-      Console.Write("1   Plain   \n2   Garlic   \n3   Sourdough   \n4   Herbs   ");
+      Console.Write("Plain   \nGarlic   \nSourdough   \nHerbs   ");
       Console.ResetColor();
       Console.WriteLine();
       Console.Write("What Type of bread would you like to buy? (plain/garlic/sour/herb): ");
@@ -114,6 +106,8 @@ namespace Bakery
       string type = ParseInput(new List<string> { "plain", "garlic", "sour", "herb" }, "Please select a valid option", onFail);
       activeBread.SetBakeType(type);
       Console.WriteLine("Your Selection has been added to checkout");
+      breadCart.Add(activeBread);
+      InitialPrompt();
     }
     public static void Checkout()
     {
@@ -201,7 +195,7 @@ namespace Bakery
       }
       catch (Exception e)
       {
-        Console.WriteLine(e);
+        Console.WriteLine(e.Message);
         DrawChecker(20);
         callback();
         return "fail";
